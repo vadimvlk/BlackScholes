@@ -1,2 +1,2 @@
-# _BlackScholes
+# BlackScholes
 Black–Scholes formula
