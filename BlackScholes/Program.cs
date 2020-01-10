@@ -1,43 +1,36 @@
 ﻿using System;
+using System.Threading;
 
 namespace BlackScholes
 {
     class Program
     {
-        class MainClass
+        public static void Main(string[] args)
         {
-
-            public static void Main(string[] args)
-            {
-                A:
-                Console.WriteLine("Input current Price: ");
-                double S = Convert.ToDouble(Console.ReadLine());
-                Console.WriteLine("Input Strike: ");
-                double X = Convert.ToDouble(Console.ReadLine());
-                Console.WriteLine("Input day for expiry: ");
-                double d = Convert.ToDouble(Console.ReadLine());
-                int y = 365;
-                Console.WriteLine("Input IV: ");
-                double v = Convert.ToDouble(Console.ReadLine());
+        A:
+            Console.WriteLine("Input current Price: ");
+            double currentPrice = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Input Strike: ");
+            double strike = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Input day for expiry: ");
+            double dayForExpiry = Convert.ToDouble(Console.ReadLine());
+            int totalYearDays = 365;
+            Console.WriteLine("Input IV: ");
+            double impliedVolatility = Convert.ToDouble(Console.ReadLine());
 
 
-                BlackSchoulZZZ blackShould = new BlackSchoulZZZ();
+            BlackScholesCalculate blackShould = new BlackScholesCalculate();
 
 
-                Console.WriteLine("Премия Call : " + (blackShould.OptionPrice('C', S, X, d, y, v)) / S);
-                Console.WriteLine("Премия Put : " + (blackShould.OptionPrice('P', S, X, d, y, v)) / S);
-                Console.WriteLine("Delta Call : " + blackShould.Delta('C', S, X, d, y, v));
-                Console.WriteLine("Delta Put" + blackShould.Delta('P', S, X, d, y, v));
-                Console.WriteLine("Gamma  : " + blackShould.Gamma(S, X, d, y, v));
-                Console.WriteLine("Vega :" + blackShould.Vega(S, X, d, y, v));
-                Console.WriteLine("Theta :" + blackShould.Theta(S, X, d, y, v));
+            Console.WriteLine("Премия Call : " + (blackShould.OptionPrice('C', currentPrice, strike, dayForExpiry, totalYearDays, impliedVolatility)) / currentPrice);
+            Console.WriteLine("Премия Put : " + (blackShould.OptionPrice('P', currentPrice, strike, dayForExpiry, totalYearDays, impliedVolatility)) / currentPrice);
+            Console.WriteLine("Delta Call : " + blackShould.Delta('C', currentPrice, strike, dayForExpiry, totalYearDays, impliedVolatility));
+            Console.WriteLine("Delta Put" + blackShould.Delta('P', currentPrice, strike, dayForExpiry, totalYearDays, impliedVolatility));
+            Console.WriteLine("Gamma  : " + blackShould.Gamma(currentPrice, strike, dayForExpiry, totalYearDays, impliedVolatility));
+            Console.WriteLine("Vega :" + blackShould.Vega(currentPrice, strike, dayForExpiry, totalYearDays, impliedVolatility));
+            Console.WriteLine("Theta :" + blackShould.Theta(currentPrice, strike, dayForExpiry, totalYearDays, impliedVolatility));
 
-
-                Console.ReadLine();
-
-                goto A;
-
-            }
+            Thread.Sleep(10000);
         }
     }
 }
